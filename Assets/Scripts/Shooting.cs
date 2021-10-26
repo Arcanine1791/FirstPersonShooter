@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstPersonShooter : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,5 @@ public class FirstPersonShooter : MonoBehaviour
     {
         
     }
-    
     
 }
