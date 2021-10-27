@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
         inputControl = new MainInput();
     }
 
-   
-
     private void OnEnable()
     {
         movment = inputControl.Player.Move;
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext obj)
     {
-        Debug.Log("Jumped");
+        GameEvents.instance.OnEnemyDead();
     }
 
     private void OnDisable()
@@ -42,5 +40,14 @@ public class Player : MonoBehaviour
         Vector2 move = movment.ReadValue<Vector2>();
 
         transform.position += new Vector3(move.x, 0, move.y);
+    }
+
+
+    private void Update()
+    {
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+           
+        //}
     }
 }

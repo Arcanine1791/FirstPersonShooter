@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool toggle=true;
+    private void Start()
     {
-        
+        GameEvents.instance.EnemyDead += KillMe;
+        GameEvents.instance.EnemyDead += updateMyMessage;
+            
+    }
+    public void KillMe()
+    {
+        toggle = !toggle;
+        this.gameObject.SetActive(toggle);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void updateMyMessage()
     {
-        
+        Debug.Log("kjhdjkhsdg");
     }
-    
+    private void OnDestroy()
+    {
+        GameEvents.instance.EnemyDead-=KillMe;
+    }
 }
