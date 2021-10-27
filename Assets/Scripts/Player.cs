@@ -6,17 +6,41 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    public Master control;
+    public MainInput inputControl;
+    public InputAction movment;
 
     private void Awake()
     {
-        control.Player.Shoot.performed +=_=> Shoot();
+        inputControl = new MainInput();
     }
 
-    void Shoot()
+   
+
+    private void OnEnable()
     {
+        movment = inputControl.Player.Move;
+        movment.Enable();
 
+        inputControl.Player.Jump.performed += Jump;
+        inputControl.Player.Jump.Enable();
     }
 
-    
+    private void Jump(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Jumped");
+    }
+
+    private void OnDisable()
+    {
+        movment.Disable();
+        inputControl.Player.Jump.Disable();
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("movement values" + movment.ReadValue<Vector2>());
+        Vector2 move = movment.ReadValue<Vector2>();
+
+        transform.position += new Vector3(move.x, 0, move.y);
+    }
 }
