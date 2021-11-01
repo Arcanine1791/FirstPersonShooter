@@ -7,17 +7,14 @@ using System;
 public class Player : MonoBehaviour
 {
     public MainInput inputControl;
-    public InputAction movment;
 
     private void Awake()
     {
         inputControl = new MainInput();
     }
-
     private void OnEnable()
     {
-        movment = inputControl.Player.Move;
-        movment.Enable();
+        inputControl.Player.Enable();
 
         inputControl.Player.Jump.performed += Jump;
         inputControl.Player.Jump.Enable();
@@ -30,14 +27,13 @@ public class Player : MonoBehaviour
 
     private void OnDisable()
     {
-        movment.Disable();
-        inputControl.Player.Jump.Disable();
+        inputControl.Player.Disable();
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("movement values" + movment.ReadValue<Vector2>());
-        Vector2 move = movment.ReadValue<Vector2>();
+        Debug.Log("movement values" + inputControl.Player.Move.ReadValue<Vector2>());
+        Vector2 move = inputControl.Player.Move.ReadValue<Vector2>();
 
         transform.position += new Vector3(move.x, 0, move.y);
     }
@@ -45,9 +41,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-           
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("hello");
+        }
     }
 }

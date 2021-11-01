@@ -10,14 +10,17 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         GameEvents.instance.EnemyDead += UpdateScore;
-      
+        GameEvents.instance.EnemyDead += heuoaud;
     }
     public void UpdateScore()
     {
         score += 10;
         scoreTxt.text = score.ToString();
     }
+    public void heuoaud()
+    {
 
+    }
     private void OnDestroy()
     {
         GameEvents.instance.EnemyDead -= UpdateScore;
